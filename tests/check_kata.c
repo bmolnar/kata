@@ -132,6 +132,30 @@ START_TEST(test_kata_sub_three_minus_one)
 }
 END_TEST
 
+START_TEST(test_kata_sub_ten_minus_one)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("X", "I", resbuf);
+  ck_assert_str_eq(resbuf, "IX");
+}
+END_TEST
+
+START_TEST(test_kata_sub_hundred_minus_one)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("C", "I", resbuf);
+  ck_assert_str_eq(resbuf, "XCIX");
+}
+END_TEST
+
+START_TEST(test_kata_sub_thousand_minus_one)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("M", "I", resbuf);
+  ck_assert_str_eq(resbuf, "CMXCIX");
+}
+END_TEST
+
 
 /*
  * test suites
@@ -210,6 +234,18 @@ kata_all(void)
 
   tc = tcase_create("test_kata_sub_three_minus_one");
   tcase_add_test(tc, test_kata_sub_three_minus_one);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_ten_minus_one");
+  tcase_add_test(tc, test_kata_sub_ten_minus_one);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_hunded_minus_one");
+  tcase_add_test(tc, test_kata_sub_hundred_minus_one);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_thousand_minus_one");
+  tcase_add_test(tc, test_kata_sub_thousand_minus_one);
   suite_add_tcase(suite, tc);
 
   return suite;
