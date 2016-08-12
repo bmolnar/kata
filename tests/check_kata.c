@@ -80,6 +80,31 @@ START_TEST(test_kata_add_one_plus_two)
 }
 END_TEST
 
+START_TEST(test_kata_add_one_plus_lesser_before_bigger)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_add("I", "IX", resbuf);
+  ck_assert_str_eq(resbuf, "X");
+}
+END_TEST
+
+START_TEST(test_kata_add_single_plus_triple)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_add("X", "XXX", resbuf);
+  ck_assert_str_eq(resbuf, "XL");
+}
+END_TEST
+
+START_TEST(test_kata_add_double_plus_triple)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_add("CC", "CCC", resbuf);
+  ck_assert_str_eq(resbuf, "D");
+}
+END_TEST
+
+
 /*
  * data_sub tests
  */
@@ -144,6 +169,18 @@ kata_all(void)
 
   tc = tcase_create("test_kata_add_one_plus_two");
   tcase_add_test(tc, test_kata_add_one_plus_two);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_add_one_plus_lesser_before_bigger");
+  tcase_add_test(tc, test_kata_add_one_plus_lesser_before_bigger);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_add_single_plus_triple");
+  tcase_add_test(tc, test_kata_add_single_plus_triple);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_add_double_plus_triple");
+  tcase_add_test(tc, test_kata_add_double_plus_triple);
   suite_add_tcase(suite, tc);
 
   /* kata_sub tests */
