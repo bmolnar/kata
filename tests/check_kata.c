@@ -29,6 +29,19 @@ START_TEST(test_kata_atoi_max_number)
 }
 END_TEST
 
+START_TEST(test_kata_atoi_empty)
+{
+  ck_assert_int_eq(kata_atoi(""), 0);
+}
+END_TEST
+
+START_TEST(test_kata_atoi_invalid)
+{
+  ck_assert_int_eq(kata_atoi("abc"), 0);
+}
+END_TEST
+
+
 /*
  * kata_itoa tests
  */
@@ -231,6 +244,14 @@ kata_all(void)
 
   tc = tcase_create("test_kata_atoi_max_number");
   tcase_add_test(tc, test_kata_atoi_max_number);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_atoi_empty");
+  tcase_add_test(tc, test_kata_atoi_empty);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_atoi_invalid");
+  tcase_add_test(tc, test_kata_atoi_invalid);
   suite_add_tcase(suite, tc);
 
   /* kata_itoa tests */
