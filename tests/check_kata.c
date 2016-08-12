@@ -72,6 +72,14 @@ START_TEST(test_kata_add_one_plus_one)
 }
 END_TEST
 
+START_TEST(test_kata_add_one_plus_two)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_add("I", "II", resbuf);
+  ck_assert_str_eq(resbuf, "III");
+}
+END_TEST
+
 /*
  * data_sub tests
  */
@@ -132,6 +140,10 @@ kata_all(void)
   /* kata_add tests */
   tc = tcase_create("test_kata_add_one_plus_one");
   tcase_add_test(tc, test_kata_add_one_plus_one);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_add_one_plus_two");
+  tcase_add_test(tc, test_kata_add_one_plus_two);
   suite_add_tcase(suite, tc);
 
   /* kata_sub tests */

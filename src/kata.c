@@ -93,7 +93,7 @@ kata_itoa(int n, char *aptr)
 void
 kata_add(const char *aptr, const char *bptr, char *resptr)
 {
-  strcpy(resptr, "II");
+  kata_itoa(kata_atoi(aptr) + kata_atoi(bptr), resptr);
 }
 
 void
