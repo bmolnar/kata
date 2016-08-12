@@ -156,6 +156,22 @@ START_TEST(test_kata_sub_thousand_minus_one)
 }
 END_TEST
 
+START_TEST(test_kata_sub_lesser_before_bigger_minus_lesser)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("CD", "C", resbuf);
+  ck_assert_str_eq(resbuf, "CCC");
+}
+END_TEST
+
+START_TEST(test_kata_sub_triple_minus_single)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("CCC", "C", resbuf);
+  ck_assert_str_eq(resbuf, "CC");
+}
+END_TEST
+
 
 /*
  * test suites
@@ -246,6 +262,14 @@ kata_all(void)
 
   tc = tcase_create("test_kata_sub_thousand_minus_one");
   tcase_add_test(tc, test_kata_sub_thousand_minus_one);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_lesser_before_bigger_minus_lesser");
+  tcase_add_test(tc, test_kata_sub_lesser_before_bigger_minus_lesser);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_triple_minus_single");
+  tcase_add_test(tc, test_kata_sub_triple_minus_single);
   suite_add_tcase(suite, tc);
 
   return suite;
