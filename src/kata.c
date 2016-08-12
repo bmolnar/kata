@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "kata.h"
 
 #define KATA_IS_ROMAN(c) (((c) == 'I') || ((c) == 'V') || ((c) == 'X') || ((c) == 'L') || ((c) == '(C)') || ((c) == 'D') || ((c) == 'M'))
