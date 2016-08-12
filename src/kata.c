@@ -57,10 +57,31 @@ kata_atoi(const char *nptr)
   return value;
 }
 
+static char *pow_3[] = {"", "M", "MM", "MMM"};
+static char *pow_2[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+static char *pow_1[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+static char *pow_0[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
 char *
 kata_itoa(int n, char *aptr)
 {
-  *aptr = 'I';
+  char *tmpptr = aptr;
+
+  strcpy(tmpptr, pow_3[n/1000]);
+  tmpptr += strlen(pow_3[n/1000]);
+  n %= 1000;
+
+  strcpy(tmpptr, pow_2[n/100]);
+  tmpptr += strlen(pow_2[n/100]);
+  n %= 100;
+
+  strcpy(tmpptr, pow_1[n/10]);
+  tmpptr += strlen(pow_1[n/10]);
+  n %= 10;
+
+  strcpy(tmpptr, pow_0[n/1]);
+  tmpptr += strlen(pow_0[n/1]);
+
   return aptr;
 }
 

@@ -32,10 +32,17 @@ END_TEST
 /*
  * kata_itoa tests
  */
-START_TEST(test_kata_itoa)
+START_TEST(test_kata_itoa_one)
 {
   char resbuf[KATA_MAXLEN];
   ck_assert_str_eq(kata_itoa(1, resbuf), "I");
+}
+END_TEST
+
+START_TEST(test_kata_itoa_two)
+{
+  char resbuf[KATA_MAXLEN];
+  ck_assert_str_eq(kata_itoa(2, resbuf), "II");
 }
 END_TEST
 
@@ -73,6 +80,7 @@ kata_all(void)
 
   suite = suite_create("kata");
 
+  /* kata_atoi tests */
   tc = tcase_create("test_kata_atoi_single_digit");
   tcase_add_test(tc, test_kata_atoi_single_digit);
   suite_add_tcase(suite, tc);
@@ -89,14 +97,21 @@ kata_all(void)
   tcase_add_test(tc, test_kata_atoi_max_number);
   suite_add_tcase(suite, tc);
 
-  tc = tcase_create("test_kata_itoa");
-  tcase_add_test(tc, test_kata_itoa);
+  /* kata_itoa tests */
+  tc = tcase_create("test_kata_itoa_one");
+  tcase_add_test(tc, test_kata_itoa_one);
   suite_add_tcase(suite, tc);
 
+  tc = tcase_create("test_kata_itoa_two");
+  tcase_add_test(tc, test_kata_itoa_two);
+  suite_add_tcase(suite, tc);
+
+  /* kata_add tests */
   tc = tcase_create("test_kata_add_one_plus_one");
   tcase_add_test(tc, test_kata_add_one_plus_one);
   suite_add_tcase(suite, tc);
 
+  /* kata_sub tests */
   tc = tcase_create("test_kata_sub_two_minus_one");
   tcase_add_test(tc, test_kata_sub_two_minus_one);
   suite_add_tcase(suite, tc);
