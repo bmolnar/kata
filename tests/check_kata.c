@@ -104,6 +104,14 @@ START_TEST(test_kata_add_double_plus_triple)
 }
 END_TEST
 
+START_TEST(test_kata_add_overflow)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_add("MMMCMXCIX", "I", resbuf);
+  ck_assert_str_eq(resbuf, "");
+}
+END_TEST
+
 
 /*
  * data_sub tests
@@ -181,6 +189,10 @@ kata_all(void)
 
   tc = tcase_create("test_kata_add_double_plus_triple");
   tcase_add_test(tc, test_kata_add_double_plus_triple);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_add_overflow");
+  tcase_add_test(tc, test_kata_add_overflow);
   suite_add_tcase(suite, tc);
 
   /* kata_sub tests */
