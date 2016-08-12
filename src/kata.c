@@ -99,5 +99,5 @@ kata_add(const char *aptr, const char *bptr, char *resptr)
 void
 kata_sub(const char *aptr, const char *bptr, char *resptr)
 {
-  strcpy(resptr, "I");
+  kata_itoa(kata_atoi(aptr) - kata_atoi(bptr), resptr);
 }

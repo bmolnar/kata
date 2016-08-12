@@ -124,6 +124,14 @@ START_TEST(test_kata_sub_two_minus_one)
 }
 END_TEST
 
+START_TEST(test_kata_sub_three_minus_one)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("III", "I", resbuf);
+  ck_assert_str_eq(resbuf, "II");
+}
+END_TEST
+
 
 /*
  * test suites
@@ -198,6 +206,10 @@ kata_all(void)
   /* kata_sub tests */
   tc = tcase_create("test_kata_sub_two_minus_one");
   tcase_add_test(tc, test_kata_sub_two_minus_one);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_three_minus_one");
+  tcase_add_test(tc, test_kata_sub_three_minus_one);
   suite_add_tcase(suite, tc);
 
   return suite;
