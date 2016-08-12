@@ -88,6 +88,14 @@ START_TEST(test_kata_add_one_plus_lesser_before_bigger)
 }
 END_TEST
 
+START_TEST(test_kata_add_lesser_before_bigger_plus_lesser)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_add("CD", "C", resbuf);
+  ck_assert_str_eq(resbuf, "D");
+}
+END_TEST
+
 START_TEST(test_kata_add_single_plus_triple)
 {
   char resbuf[KATA_MAXLEN];
@@ -101,6 +109,14 @@ START_TEST(test_kata_add_double_plus_triple)
   char resbuf[KATA_MAXLEN];
   kata_add("CC", "CCC", resbuf);
   ck_assert_str_eq(resbuf, "D");
+}
+END_TEST
+
+START_TEST(test_kata_add_carry)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_add("CM", "CC", resbuf);
+  ck_assert_str_eq(resbuf, "MC");
 }
 END_TEST
 
@@ -172,6 +188,22 @@ START_TEST(test_kata_sub_triple_minus_single)
 }
 END_TEST
 
+START_TEST(test_kata_sub_carry)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("MC", "CC", resbuf);
+  ck_assert_str_eq(resbuf, "CM");
+}
+END_TEST
+
+START_TEST(test_kata_sub_overflow)
+{
+  char resbuf[KATA_MAXLEN];
+  kata_sub("X", "X", resbuf);
+  ck_assert_str_eq(resbuf, "");
+}
+END_TEST
+
 
 /*
  * test suites
@@ -231,12 +263,20 @@ kata_all(void)
   tcase_add_test(tc, test_kata_add_one_plus_lesser_before_bigger);
   suite_add_tcase(suite, tc);
 
+  tc = tcase_create("test_kata_add_lesser_before_bigger_plus_lesser");
+  tcase_add_test(tc, test_kata_add_lesser_before_bigger_plus_lesser);
+  suite_add_tcase(suite, tc);
+
   tc = tcase_create("test_kata_add_single_plus_triple");
   tcase_add_test(tc, test_kata_add_single_plus_triple);
   suite_add_tcase(suite, tc);
 
   tc = tcase_create("test_kata_add_double_plus_triple");
   tcase_add_test(tc, test_kata_add_double_plus_triple);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_add_carry");
+  tcase_add_test(tc, test_kata_add_carry);
   suite_add_tcase(suite, tc);
 
   tc = tcase_create("test_kata_add_overflow");
@@ -270,6 +310,14 @@ kata_all(void)
 
   tc = tcase_create("test_kata_sub_triple_minus_single");
   tcase_add_test(tc, test_kata_sub_triple_minus_single);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_carry");
+  tcase_add_test(tc, test_kata_sub_carry);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_sub_overflow");
+  tcase_add_test(tc, test_kata_sub_overflow);
   suite_add_tcase(suite, tc);
 
   return suite;
