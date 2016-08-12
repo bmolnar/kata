@@ -46,6 +46,21 @@ START_TEST(test_kata_itoa_two)
 }
 END_TEST
 
+START_TEST(test_kata_itoa_max_number)
+{
+  char resbuf[KATA_MAXLEN];
+  ck_assert_str_eq(kata_itoa(3999, resbuf), "MMMCMXCIX");
+}
+END_TEST
+
+START_TEST(test_kata_itoa_overflow)
+{
+  char resbuf[KATA_MAXLEN];
+  ck_assert_str_eq(kata_itoa(4000, resbuf), "");
+}
+END_TEST
+
+
 /*
  * kata_add tests
  */
@@ -104,6 +119,14 @@ kata_all(void)
 
   tc = tcase_create("test_kata_itoa_two");
   tcase_add_test(tc, test_kata_itoa_two);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_itoa_max_number");
+  tcase_add_test(tc, test_kata_itoa_max_number);
+  suite_add_tcase(suite, tc);
+
+  tc = tcase_create("test_kata_itoa_overflow");
+  tcase_add_test(tc, test_kata_itoa_overflow);
   suite_add_tcase(suite, tc);
 
   /* kata_add tests */

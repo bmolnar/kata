@@ -67,20 +67,25 @@ kata_itoa(int n, char *aptr)
 {
   char *tmpptr = aptr;
 
-  strcpy(tmpptr, pow_3[n/1000]);
-  tmpptr += strlen(pow_3[n/1000]);
-  n %= 1000;
+  *tmpptr = '\0';
 
-  strcpy(tmpptr, pow_2[n/100]);
-  tmpptr += strlen(pow_2[n/100]);
-  n %= 100;
+  if (n > 0 && n <= KATA_MAXNUM)
+  {
+    strcpy(tmpptr, pow_3[n/1000]);
+    tmpptr += strlen(pow_3[n/1000]);
+    n %= 1000;
 
-  strcpy(tmpptr, pow_1[n/10]);
-  tmpptr += strlen(pow_1[n/10]);
-  n %= 10;
+    strcpy(tmpptr, pow_2[n/100]);
+    tmpptr += strlen(pow_2[n/100]);
+    n %= 100;
 
-  strcpy(tmpptr, pow_0[n/1]);
-  tmpptr += strlen(pow_0[n/1]);
+    strcpy(tmpptr, pow_1[n/10]);
+    tmpptr += strlen(pow_1[n/10]);
+    n %= 10;
+
+    strcpy(tmpptr, pow_0[n/1]);
+    tmpptr += strlen(pow_0[n/1]);
+  }
 
   return aptr;
 }

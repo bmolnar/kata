@@ -2,6 +2,7 @@
 #define _KATA_H
 
 #define KATA_MAXLEN 16
+#define KATA_MAXNUM 3999
 
 int kata_atoi(const char *nptr);
 char * kata_itoa(int n, char *aptr);
